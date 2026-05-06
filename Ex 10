@@ -1,0 +1,112 @@
+import React from 'react';
+import {
+  View,
+  Text,
+  Image,
+  FlatList,
+  StyleSheet,
+  useColorScheme,
+  Pressable,
+} from 'react-native';
+
+export default function App() {
+  const theme = useColorScheme();
+  const dark = theme === 'dark';
+
+  const posts = Array.from({ length: 9 });
+
+  return (
+    <View style={[styles.container, { backgroundColor: dark ? '#000' : '#fff' }]}>
+      
+      {/* Header */}
+      <View style={styles.header}>
+        <Image
+          source={{ uri: 'https://via.placeholder.com/100' }}
+          style={styles.avatar}
+        />
+        <Text style={[styles.name, { color: dark ? '#fff' : '#000' }]}>
+          Miguel
+        </Text>
+        <Text style={{ color: dark ? '#aaa' : '#555' }}>
+          Desenvolvedor
+        </Text>
+      </View>
+
+      {/* Stats */}
+      <View style={styles.stats}>
+        {['Posts', 'Seguidores', 'Seguindo'].map((item, i) => (
+          <View key={i} style={styles.stat}>
+            <Text style={{ fontWeight: 'bold', color: dark ? '#fff' : '#000' }}>
+              100
+            </Text>
+            <Text style={{ color: dark ? '#aaa' : '#555' }}>{item}</Text>
+          </View>
+        ))}
+      </View>
+
+      {/* Botão */}
+      <Pressable
+        style={({ pressed }) => [
+          styles.followBtn,
+          { opacity: pressed ? 0.7 : 1 },
+        ]}
+      >
+        <Text style={{ color: '#fff' }}>Seguir</Text>
+      </Pressable>
+
+      {/* Grid */}
+      <FlatList
+        data={posts}
+        numColumns={3}
+        keyExtractor={(_, i) => i.toString()}
+        renderItem={() => <View style={styles.post} />}
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1 },
+
+  header: {
+    alignItems: 'center',
+    marginTop: 40,
+  },
+
+  avatar: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+  },
+
+  name: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 10,
+  },
+
+  stats: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginVertical: 20,
+  },
+
+  stat: {
+    alignItems: 'center',
+  },
+
+  followBtn: {
+    backgroundColor: 'blue',
+    marginHorizontal: 40,
+    padding: 12,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+
+  post: {
+    flex: 1,
+    height: 120,
+    borderWidth: 1,
+  },
+});
