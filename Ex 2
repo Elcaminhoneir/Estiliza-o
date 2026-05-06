@@ -1,0 +1,46 @@
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text>HEADER</Text>
+      </View>
+
+      <View style={styles.content}>
+        <Text>CONTEÚDO</Text>
+      </View>
+
+      <TouchableOpacity style={styles.button}>
+        <Text style={{ color: '#fff' }}>Botão</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1 },
+
+  header: {
+    height: 80,
+    backgroundColor: 'lightblue',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  content: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  button: {
+    position: 'absolute',
+    bottom: 20,
+    alignSelf: 'center',
+    backgroundColor: 'blue',
+    padding: 15,
+    borderRadius: 10,
+  },
+});
