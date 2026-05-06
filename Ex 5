@@ -1,0 +1,31 @@
+import React from 'react';
+import { View, Text, StyleSheet, Platform, StatusBar } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <StatusBar barStyle="light-content" />
+      <Text style={styles.text}>Plataforma: {Platform.OS}</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    ...Platform.select({
+      ios: {
+        backgroundColor: '#fff',
+      },
+      android: {
+        backgroundColor: '#333',
+      },
+    }),
+  },
+  text: {
+    color: Platform.OS === 'android' ? '#fff' : '#000',
+    fontSize: 18,
+  },
+});
