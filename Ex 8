@@ -1,0 +1,68 @@
+import React from 'react';
+import styled, { ThemeProvider } from 'styled-components/native';
+
+const theme = {
+  colors: {
+    primary: '#6C63FF',
+    bg: '#F5F5F5',
+    text: '#333',
+  },
+  spacing: (factor) => `${factor * 8}px`,
+};
+
+// Typography
+const H1 = styled.Text`
+  font-size: 24px;
+  font-weight: bold;
+  color: ${(p) => p.theme.colors.text};
+`;
+
+const Body = styled.Text`
+  font-size: 16px;
+  color: ${(p) => p.theme.colors.text};
+`;
+
+// Card
+const Card = styled.View`
+  background: white;
+  padding: ${(p) => p.theme.spacing(2)};
+  margin: ${(p) => p.spacing || '16px'};
+  border-radius: 10px;
+  elevation: 4;
+`;
+
+// Button
+const Button = styled.TouchableOpacity`
+  background: ${(p) => p.theme.colors.primary};
+  padding: ${(p) => p.theme.spacing(2)};
+  border-radius: 8px;
+  margin-top: 10px;
+`;
+
+const ButtonText = styled.Text`
+  color: white;
+  text-align: center;
+`;
+
+export default function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      <Container>
+        <Card spacing="20px">
+          <H1>Título</H1>
+          <Body>Texto do design system</Body>
+          <Button>
+            <ButtonText>Botão</ButtonText>
+          </Button>
+        </Card>
+      </Container>
+    </ThemeProvider>
+  );
+}
+
+const Container = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background: ${(p) => p.theme.colors.bg};
+`;
