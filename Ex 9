@@ -1,0 +1,55 @@
+import React, { useRef, useEffect } from 'react';
+import { View, Animated, StyleSheet, Button, Easing } from 'react-native';
+
+export default function App() {
+  const progress = useRef(new Animated.Value(0)).current;
+
+  const animate = () => {
+    Animated.timing(progress, {
+      toValue: Math.random(),
+      duration: 600,
+      easing: Easing.out(Easing.ease),
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const width = progress.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0%', '100%'],
+  });
+
+  const backgroundColor = progress.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: ['green', 'yellow', 'red'],
+  });
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.bar}>
+        <Animated.View
+          style={[styles.progress, { width, backgroundColor }]}
+        />
+      </View>
+
+      <Button title="Animar" onPress={animate} />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+  },
+  bar: {
+    height: 20,
+    backgroundColor: '#ddd',
+    borderRadius: 10,
+    overflow: 'hidden',
+    marginBottom: 20,
+  },
+  progress: {
+    height: '100%',
+  },
+});
